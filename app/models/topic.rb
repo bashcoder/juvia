@@ -1,6 +1,6 @@
 class Topic < ActiveRecord::Base
   belongs_to :site, :inverse_of => :topics
-  has_many :comments, :order => 'created_at DESC', :inverse_of => :topic
+  has_many :comments, :order => "created_at DESC", :inverse_of => :topic
 
   validates_presence_of :key
   validates_presence_of :title
@@ -47,10 +47,12 @@ private
     Topic.
       where('sites.key = ? AND topics.key = ?', site_key, topic_key).
       joins(:site).
+      select('topics.*').
       first ||
     Topic.
       where('sites.key = ? AND topics.key = ?', site_key, alt_key(topic_key)).
       joins(:site).
+      select('topics.*').
       first
   end
 end

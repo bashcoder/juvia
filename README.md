@@ -15,16 +15,24 @@ Other notable highlights:
  * Email notification of new comments.
  * Wordpress comment import (thanks to JangoSteve).
 
+## Discussion & support
+
+Please join [the Juvia discussion forum](https://groups.google.com/forum/?fromgroups#!forum/juvia).
+
 ## Demo
 
-You can see Juvia in action at [the demo site](http://juvia-demo.phusion.nl). Login with `a@a.com` / `123456`. Post comments at [this test comments page](http://juvia-demo.phusion.nl/admin/sites/1/test). The demo site is reset every 24 hours.
+You can see Juvia in action at [the demo site](http://juvia-demo.phusion.nl). Login with `discard@phusion.nl` / `123456`. Post comments at [this test comments page](http://juvia-demo.phusion.nl/admin/sites/1/test). The demo site is reset every 24 hours.
+
+<img src="http://brightbox.com/images/misc/logo.png">
+
+The demo site is hosted on a server by [Brightbox](http://www.brightbox.com).
 
 ## Installation
 
 1. Clone this repository into a desired directory and `cd` to it.
 2. Configure your database details by editing config/database.yml. An example is provided in config/database.yml.example. Only edit the information under the 'production' section.
 3. Configure other things by editing config/application.yml. An example is provided in config/application.yml.example. Only edit the information under the 'production' section.
-4. Install the necessary dependencies: `bundle install --without='development test' --path=help`
+4. Install the necessary dependencies: `bundle install --without='development test postgres sqlite' --path=help`
 5. Install the database schema: `bundle exec rake db:schema:load RAILS_ENV=production`
 6. Compile the static assets: `bundle exec rake assets:precompile RAILS_ENV=production RAILS_GROUPS=assets`
 7. Deploy this application to Phusion Passenger or whatever application server you prefer.
@@ -39,6 +47,18 @@ You can now access Juvia through the address that you configured. It will ask yo
 4. Compile the static assets: `bundle exec rake assets:precompile RAILS_ENV=production RAILS_GROUPS=assets`
 5. Run `touch tmp/restart.txt` (if you're using Phusion Passenger) or restart your application server.
 
+## Cryptographic verification
+
+I do not release source tarballs for Juvia. Users are expected to get the source code from Github.
+
+From time to time, I create Git tags for milestones. These milestones are signed with the [Phusion Software Signing key](http://www.phusion.nl/about/gpg). After importing this key you can verify Git tags as follows:
+
+    git tag --verify milestone-2013-03-11
+
+## Rails helper
+
+James Smith has written a Rails helper gem for embedding Juvia comments into Rails web applications. See [juvia_rails](https://github.com/theodi/juvia_rails).
+
 ## TODO
 
 Juvia currently suits my need so I may or may not work on these things in the future. But if you want to contribute you are more than welcome to do so!
@@ -46,7 +66,6 @@ Juvia currently suits my need so I may or may not work on these things in the fu
  * A better logo. I drew the current one in Inkscape in about an hour but I'm sure real artists can do better.
  * Juvia works fine but we need more tests to prevent things from breaking in the future.
  * Document the `list_topics` API call.
- * Set rel=nofollow on links inside comments.
  * A Quote/Reply button for each comment.
  * Export support. Not sure whether this is necessary, the user may as well backup the entire database.
  * Email notification for commenters.
